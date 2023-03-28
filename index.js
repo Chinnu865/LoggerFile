@@ -4,7 +4,7 @@ const { Worker } = require('worker_threads');
 const app = express();
 
 app.get('/find', (req, res) => {
-  const worker = new Worker('./worker.js');
+  const worker = new Worker('./worker1.js');
 
   worker.on('message', (msg) => {
     if (msg.progress) {

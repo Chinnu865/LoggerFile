@@ -12,7 +12,7 @@ const User = connection.define('user', {
   name: {
     type: DataTypes.STRING,
   },
-  phone: {
+  phone: {  
     type: DataTypes.STRING
   }
 }, {
@@ -47,7 +47,7 @@ async function exportDataToExcel(chunks) {
 
     await workbook.xlsx.writeFile(`./excel/data.xlsx`);
     remainingCount -= jsonData.length;
-    offset += chunkSize;
+    offset += jsonData.length;
 
     const progress = Math.round((offset / totalCount) * 100);
     parentPort.postMessage({ progress });
