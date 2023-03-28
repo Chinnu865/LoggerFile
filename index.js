@@ -1,15 +1,14 @@
-const { totalCount } = require('./worker1');
 const express = require('express');
 const { Worker } = require('worker_threads');
 
 const app = express();
 
 app.get('/find', (req, res) => {
-  const worker = new Worker('./worker1.js');
+  const worker = new Worker('./worker.js');
 
   worker.on('message', (msg) => {
     if (msg.progress) {
-      console.log(`Exported ${msg.progress} of ${totalCount}`);
+      console.log(`Exported ${msg.progress}% of data`);
     }
 
     if (msg.done) {

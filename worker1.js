@@ -49,12 +49,7 @@ async function exportDataToExcel(chunks) {
     remainingCount -= jsonData.length;
     offset += chunkSize;
 
-    if(chunkSize > remainingCount){
-      offset = chunkSize + remainingCount;
-    }
-    // console.log(remainingCount, offset, totalCount);
-    let progress = `chunk size 500`;
-    
+    const progress = Math.round((offset / totalCount) * 100);
     parentPort.postMessage({ progress });
   }
 
