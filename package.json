@@ -25,6 +25,8 @@
     "pdfkit": "^0.13.0",
     "puppeteer": "^19.8.0",
     "sequelize": "^6.30.0",
+    "winston": "^3.8.2",
+    "worker-threads": "^1.0.0",
     "xlsx": "^0.18.5"
   }
 }
