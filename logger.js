@@ -1,18 +1,27 @@
 const { createLogger, transports, format } = require('winston');
 
+const customFormat = format.combine(format.timestamp({ format:"DD:MM:YY::HH:mm:ss" }), format.printf((info) => {
+    return `${info.timestamp}-[${info.level.toUpperCase().padEnd(5)}]-${info.message}`
+}));
+
 const userLogger = createLogger({
     transports:[
         new transports.File({
-            filename:'user.log',
+            filename:'./logs/user.log',
             level:'info',
-            format:format.combine(format.timestamp(), format.json())
-        }),
-        new transports.File({
-            filename:'userError.log',
-            level:'error',
-            format:format.combine(format.timestamp(), format.json())
+            format:customFormat,
         })
     ]
 })
 
-module.exports = { userLogger };
+const userErrorLogger = createLogger({
+    transports:[
+        new transports.File({
+            filename:'./logs/userError.log',
+            level:'error',
+            format:customFormat,
+        })
+    ]
+})
+
+module.exports = { userLogger, userErrorLogger };

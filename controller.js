@@ -1,15 +1,16 @@
 const { exportDataToExcel } = require('./service');
-const logger = require('./logger');
+const { userLogger, userErrorLogger } = require('./logger');
 
 async function exportToExcel(req, res) {
+  // throw 'error'
   try {
     const result = await exportDataToExcel(500);
     res.send(result);
-    logger.userLogger.log('info','Successfully converted');
+    userLogger.log('info','Successfully converted to excel');
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred while exporting data to Excel!');
-    logger.userLogger.log('error','Cannot be converted');
+    userErrorLogger.log('error','Cannot be converted');
   }
 }
 

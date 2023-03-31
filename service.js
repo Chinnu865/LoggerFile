@@ -2,10 +2,11 @@ const ExcelJS = require('exceljs');
 const { User } = require('./model');
 
 async function exportDataToExcel(chunkSize) {
+  
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet(`My_Sheet`);
 
-  const totalCount = await User.count();
+  const totalCount = await User.counts();
   let offset = 0;
   let remainingCount = totalCount;
 
